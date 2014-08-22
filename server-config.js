@@ -5,6 +5,7 @@ var util = require('./lib/utility');
 var handler = require('./lib/request-handler');
 
 var app = express();
+var cookieSecret = process.env.SECRET || 'shhhh, very secret';
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
@@ -12,7 +13,7 @@ app.configure(function() {
   app.use(partials());
   app.use(express.bodyParser());
   app.use(express.static(__dirname + '/public'));
-  app.use(express.cookieParser('shhhh, very secret'));
+  app.use(express.cookieParser(cookieSecret));
   app.use(express.session());
 });
 
